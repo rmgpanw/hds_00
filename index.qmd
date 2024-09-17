@@ -1,0 +1,86 @@
+---
+title: "Neovascular Age-related Macular Degeneration Visual Outcomes"
+author: "Me"
+format: 
+  html:
+    code-fold: true
+    code-link: true
+    self-contained: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Overview
+
+**Aim:** to explore 12 year data of patients with treatment-naive neovascular age-related macular degeneration (AMD) who received intravitreal anti-VEGF therapy ([Fu et al](https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2772986))
+
+## Set up
+
+Start your notebook by loading any required packages and importing raw data
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+
+amd <- read_csv("MEH_AMD_survivaloutcomes_database.csv")
+```
+
+## Explore data
+
+Look at the first few rows using `head()` (in RStudio consider also using `View()` for an interactive table viewer)
+
+```{r}
+head(amd)
+```
+
+Summarise with `summary()`
+
+```{r}
+summary(amd)
+```
+
+## Selecting columns and filtering rows
+
+- Select visual acuity, age group and injection number columns
+- Filter for first injections only
+
+```{r}
+amd_first_injection_vas <- amd |>
+  select(va,
+         injnum,
+         age_group) |>
+  filter(injnum == 1)
+```
+
+> - N rows in full dataset: `r nrow(amd)`
+> - N rows in filtered dataset: `r nrow(amd_first_injection_vas)`
+
+## Plots
+
+Box and whisker plots
+
+```{r}
+amd_first_injection_vas |>
+  ggplot(aes(x = age_group, y = va)) +
+  geom_boxplot(aes(fill = age_group)) +
+  theme_bw()
+```
+
+Histogram
+
+```{r}
+amd_first_injection_vas |>
+  ggplot(aes(x = va)) +
+  geom_histogram(aes(fill = age_group), alpha = 0.7, binwidth = 5) +
+  theme_bw()
+```
+
+Density plot
+
+```{r}
+amd_first_injection_vas |>
+  ggplot(aes(x = va)) +
+  geom_density(aes(fill = age_group), alpha = 0.5) +
+  theme_bw()
+```
