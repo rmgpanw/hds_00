@@ -1,0 +1,32 @@
+{
+  "name": "RStudio and JupyterLab Environment",
+  "image": "rmgpanw/rwd:0.2.0",
+  "postStartCommand": "echo 'www-port=8787\nauth-none=1' > /etc/rstudio/rserver.conf && rstudio-server restart",
+  "forwardPorts": [8787, 8888],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",          // Core Python extension
+        "ms-toolsai.jupyter",        // Jupyter Notebook support
+        "ms-toolsai.jupyter-keymap", // Jupyter key bindings
+        "ms-toolsai.jupyter-renderers", // Enhanced Jupyter renderers
+        "quarto.quarto",             // Quarto extension for .qmd support
+        "ms-azuretools.vscode-docker", // Docker extension (for Docker-in-Docker)
+        "ms-vscode.cpptools",        // C++ support (optional for compiling dependencies)
+        "ms-vscode-remote.remote-containers", // VS Code Remote Containers
+        "yzhang.markdown-all-in-one" // Markdown support (for improved .md editing)
+      ]
+    }
+  },
+  "remoteUser": "rstudio",
+  "features": {
+    "docker-in-docker": "latest"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/home/rstudio,type=bind"
+  ]
+}
+
