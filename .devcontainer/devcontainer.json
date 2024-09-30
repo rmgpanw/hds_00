@@ -1,7 +1,8 @@
 {
   "name": "RStudio and JupyterLab Environment",
   "image": "rmgpanw/rwd:0.2.0",
-  "postStartCommand": "echo 'www-port=8787\nauth-none=1' > /etc/rstudio/rserver.conf && rstudio-server restart",
+  "postStartCommand": "echo 'www-port=8787\nauth-none=1' > /etc/rstudio/rserver.conf && sudo rstudio-server restart",
+  "postCreateCommand": "echo 'rstudio ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/rstudio && sudo chmod 0440 /etc/sudoers.d/rstudio",
   "forwardPorts": [8787, 8888],
   "customizations": {
     "vscode": {
@@ -17,7 +18,10 @@
         "ms-azuretools.vscode-docker", // Docker extension (for Docker-in-Docker)
         "ms-vscode.cpptools",        // C++ support (optional for compiling dependencies)
         "ms-vscode-remote.remote-containers", // VS Code Remote Containers
-        "yzhang.markdown-all-in-one" // Markdown support (for improved .md editing)
+        "yzhang.markdown-all-in-one", // Markdown support (for improved .md editing)
+	"ikuyadeu.r",                    // Core R extension for VS Code
+        "reditorsupport.r-lsp",          // R language server support for linting and IntelliSense
+        "quarto.quarto-vscode-r"         // Quarto R extension for R Markdown and Quarto R support
       ]
     }
   },
