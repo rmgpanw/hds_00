@@ -281,3 +281,54 @@ df3 <- df2
 df3$character <- toupper(df3$character)
 df3
 ```
+
+## Loops
+
+### For loops
+
+Do something for each item in an interable (vector/list)
+
+```{r}
+for (item in my_list) {
+  print(class(item))
+}
+```
+
+Can also loop through by index using `seq_along()`
+
+```{r}
+for (i in seq_along(my_list)) {
+  print(i)
+  print(class(my_list[[i]]))
+}
+```
+
+A common pattern is to create an empty list to hold the results from your loop
+
+```{r}
+# initiate an empty list
+result <- list()
+
+# loop through an iterable
+iterable <- c(1, 2, 3, 4, 5)
+
+for (i in seq_along(iterable)) {
+  result[[LETTERS[i]]] <- iterable[i]
+}
+
+# final result
+result
+```
+
+### While loops
+
+Continue looping while a certain condition is met (beware infinite loops!)
+
+```{r}
+x <- 0
+
+while (x < 5) {
+  print(x)
+  x <- x + 1
+}
+```
