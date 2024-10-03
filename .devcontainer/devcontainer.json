@@ -1,4 +1,5 @@
 {
+	// from https://github.com/rocker-org/devcontainer-try-r
 	"name": "Combination of r-rig and rstudio-server",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"features": {
